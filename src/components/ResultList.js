@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, FlatList, TouchableOpacity, StyleSheet} from 'react-native';
+import {withNavigation} from 'react-navigation'; // to navigate between screens;
 import ResultDetail from './ResultsDetails';
 
 const ResultList = ({title, results, navigation}) => {
@@ -13,7 +14,7 @@ const ResultList = ({title, results, navigation}) => {
         keyExtractor={result => result.id}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', {id: item.id})}>
               <ResultDetail result={item} />
             </TouchableOpacity>
           );
@@ -36,4 +37,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ResultList;
+export default withNavigation(ResultList);
